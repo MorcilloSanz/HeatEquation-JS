@@ -1,0 +1,15 @@
+html, body {
+  margin: 0;
+  padding: 10px;
+}
+
+header {
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+}
+canvas {
+  display: block;
+}
