@@ -2,7 +2,7 @@
 Solving heat equation in R^2
 
 ## Formal definition
-In mathematics, if given an open subset **U** of **R^n** (R^3 in this definition) and a subinterval **I** of **R**, one says that a function **u : U × I → R** is a solution of the heat equation if 
+In mathematics, if given an open subset **U** of **R^n** (R^3 in this definition) and a subinterval **I** of **R**, one says that a function **u : U × I → R** is a solution of the heat equation if
 
 ![alt text](https://github.com/MorcilloSanz/HeatField/blob/main/img/definition.png)
 
