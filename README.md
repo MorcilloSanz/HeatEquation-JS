@@ -1,10 +1,10 @@
 # HeatEquation-JS :fire:
-Solving heat equation in R^2
+Approximating heat equation in R^2
 
 [Simulation](https://morcillosanz.github.io/HeatEquation-JS/)
 
 ## Formal definition
-In mathematics, if given an open subset **U** of **R^n** (R^3 in this definition) and a subinterval **I** of **R**, one says that a function **u : U × I → R** is a solution of the heat equation if
+In mathematics, if given an open subset **U** of **R^n** (R^2 in this case) and a subinterval **I** of **R**, one says that a function **u : U × I → R** is a solution of the heat equation if
 
 ![alt text](https://github.com/MorcilloSanz/HeatEquation-JS/blob/main/img/definition.png)
 
@@ -13,9 +13,7 @@ where **(x, y, z, t)** denotes a general point of the domain. It is typical to r
 in which **α** is a positive coefficient called the thermal diffusivity of the medium
 
 ### Discretizing heat equation
-Use the 2D heat equation and discretize it using **finite differences** (Taylor series aproximation)
-
-The final discrete form of the heat equation:
+Discretization of the 2D heat equation using **finite differences** (Taylor series aproximation)
 
 ![alt text](https://github.com/MorcilloSanz/HeatEquation-JS/blob/main/img/definition2.png)
 
