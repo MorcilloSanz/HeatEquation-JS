@@ -4,7 +4,7 @@ html, body {
 }
 
 header {
-  padding: 10px;
+  padding-bottom: 10px;
 }
 
 td {
@@ -12,4 +12,8 @@ td {
 }
 canvas {
   display: block;
+}
+
+table {
+  border: 1px solid black;
 }
