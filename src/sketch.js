@@ -117,8 +117,6 @@ function initDiffusion() {
     scalarField.getSquare(i, 6).conductivity = 0;
     scalarField.getSquare(i, scalarField.m -1 - 6).conductivity = 0;
   }
-  
-  
 }
 
 function setup() {
