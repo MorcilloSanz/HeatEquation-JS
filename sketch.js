@@ -1,3 +1,13 @@
+/*
+  Isotropic Diffusion, as well known as Heat Equation
+
+  Dev: MorcilloSanz
+  Email: amorcillosanz@gmail.com
+  GitHub: https://github.com/MorcilloSanz
+*/
+
+const conductivity = 0.02;
+
 function Square(x, y, conductivity, temperature) {
   
   this.x = x;
@@ -19,7 +29,6 @@ function ScalarField(n, m, squareWidth, squareHeight) {
   for(let j = 0; j < this.m; j ++) {
     for(let i = 0; i < this.n; i ++) {
       let square = null;
-      const conductivity = 0.02;
       const temperature = 0;
       if(i == 0 || j == 0 || i == this.n - 1 || j == this.m - 1)
         square = new Square(0 + (i * this.squareWidth), 0 + (j * this.squareHeight), 0, 0);
@@ -55,6 +64,7 @@ function ScalarField(n, m, squareWidth, squareHeight) {
         let alpha = (currentSquare.conductivity * dt) / (2 * dx * dx);
         let newTemperature = currentSquare.temperature + alpha * (temperatureNorth + temperatureSouth + temperatureEast + temperatureWest);
         currentSquare.temperature = newTemperature;
+        
       }
     }
   }
@@ -91,18 +101,27 @@ function ScalarField(n, m, squareWidth, squareHeight) {
 
 var scalarField = null;
 
-function setup() {
-  createCanvas(600, 600);
-
+function initDiffusion() {
   const squareSize = 20;
   scalarField = new ScalarField(width / squareSize, height / squareSize, squareSize, squareSize);
   
-  // Start point
-  scalarField.getSquare(8, 15).temperature = 1;
-  
-  // Create wall
-  for(let j = 8; j < height / squareSize - 8; j ++)
+  // Create obstacles
+  for(let j = 5; j < height / squareSize - 5; j ++) {
+    scalarField.getSquare(13, j).conductivity = 0;
     scalarField.getSquare(15, j).conductivity = 0;
+  }
+  scalarField.getSquare(13, 15).conductivity = conductivity;
+  scalarField.getSquare(15, 15).conductivity = conductivity;
+  
+  for(let i = 14; i < scalarField.n; i ++) {
+    scalarField.getSquare(i, 6).conductivity = 0;
+    scalarField.getSquare(i, scalarField.m -1 - 6).conductivity = 0;
+  }
+}
+
+function setup() {
+  createCanvas(620, 620);
+  initDiffusion();
 }
 
 function draw() {
@@ -112,4 +131,16 @@ function draw() {
     scalarField.draw();
     scalarField.applyDiffusion();
   }
+  
+  fill(255);
+  stroke(0);
+  text("Press A in order to init diffusion", 25, 25);
+  text("Press R in order to reset diffusion", 25, 45);
+}
+
+function keyPressed() {
+  if(key == "A" || key == "a") 
+    scalarField.getSquare(8, 15).temperature = 1;
+  else if(key == "R" || key == "r")  
+    initDiffusion();
 }
