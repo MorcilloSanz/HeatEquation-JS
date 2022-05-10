@@ -18,9 +18,4 @@ Discretization of the 2D heat equation using **finite differences** (Taylor seri
 ![alt text](https://github.com/MorcilloSanz/HeatEquation-JS/blob/main/img/definition2.png)
 
 ## Examples
-<table>
-  <tr>
-    <td><img src="./img/1.png" width = 250px height = 250px></td>
-    <td><img src="./img/2.png" width = 250px height = 250px></td>
-  </tr>
-</table>
+![alt text](https://github.com/MorcilloSanz/HeatEquation-JS/blob/main/img/demo.gif)
