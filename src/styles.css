@@ -1,0 +1,24 @@
+* {
+	font-family: 'Montserrat', sans-serif;
+}
+
+body {
+	color:white;
+	background-color: black;
+	padding: 10px;
+	margin: 10px;
+}
+
+div.canvas {
+	overflow: hidden;
+	float:left;
+}
+
+div.maths {
+	float:left;
+	margin-left: 10px;
+}
+
+img {
+	margin-right: 20px;
+}
