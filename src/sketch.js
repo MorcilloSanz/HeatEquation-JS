@@ -87,11 +87,11 @@ function ScalarField(n, m, squareWidth, squareHeight) {
       
       // Draw
       if(this.squares[i].conductivity == 0)
-        fill(70, 70, 70);
+        fill(40, 40, 40);
       else
         fill(r, g, b);
       
-      stroke(33, 33, 33);
+      stroke(40, 40, 40);
       rect(this.squares[i].x, this.squares[i].y, this.squareWidth, this.squareHeight);
     }
     
