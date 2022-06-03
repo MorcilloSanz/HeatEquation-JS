@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="p5.js"></script>
-    <script src="p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8">
-  </head>
-  <body>
-    <header>
-      <table>
-        <tr>
-          <h1>Solving heat equation in R^2</h1>
-        </tr>
-        <tr>
-          <td><img src="res/definition.png" alt=""></td>
-        </tr>
-        <tr>
-          <td>Discretization using finite differences (Taylor series aproximation):</td>
-        </tr>
-        <tr>
-          <td><img src="res/definition2.png" alt=""></td>
-        </tr>
-    </header>
-    <script src="sketch.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>Heat Equation</title>
+</head>
+<body>
+  <header>
+    <table>
+      <tr>
+        <td><h1>Isotropic Diffusion (Heat Equation)</h1></td>
+        <td><img src="img/fire.png" alt=""/></td>
+      </tr>
+    </table>
+    
+  </header>
+  <main>
+    <div class="canvas"> 
+      <object type="text/html" data="heatEquation.htm" width="640px" height="640px"></object>
+    </div>
+    <div class="maths">
+      <h2>Formal definition:</h2>
+      <pre>
+In mathematics, if given an open subset U of R^n (R^2 in this case) and a subinterval 
+I of R, one says that a function u : U × I → R is a solution of the heat equation if</pre>
+      <img src="img/definition.png" alt="">
+      <h3>Using Finite Differences:</h3>
+      <pre>
+By combining different Taylor series expansions, we can obtain approximations of the 
+first and second derivatives</pre>
+      <img src="img/timeDerivative.png" alt=""><img src="img/xDerivative.png" alt="">
+      <p>Substituting in the original equation we get the discrete form of the Heat Equation</p>
+      <img src="img/discreteEquation.png" alt="">
+      <p>Where:</p>
+      <img src="img/increments.png" alt="">
+      <img src="img/T.png" alt="">
+    </div>
+  </main>
+</body>
 </html>
