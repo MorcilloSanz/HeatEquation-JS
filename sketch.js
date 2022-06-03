@@ -39,7 +39,7 @@ function ScalarField(n, m, squareWidth, squareHeight) {
     }
   }
   
-  this.applyDiffusion = function() {
+  this.applyDiffusion = function(cooling) {
     
     const dx = 1, dt = 1;
     
@@ -55,10 +55,13 @@ function ScalarField(n, m, squareWidth, squareHeight) {
         }
         
         // Square lattice
-        let temperatureNorth = this.getSquare(i, j - 1).temperature;
-        let temperatureSouth = this.getSquare(i, j + 1).temperature;
-        let temperatureWest = this.getSquare(i - 1, j).temperature;
-        let temperatureEast = this.getSquare(i + 1, j).temperature;
+        let temp = 0;
+        if(cooling) temp = currentSquare.temperature;
+        
+        let temperatureNorth = this.getSquare(i, j - 1).temperature - temp;
+        let temperatureSouth = this.getSquare(i, j + 1).temperature - temp;
+        let temperatureWest = this.getSquare(i - 1, j).temperature - temp;
+        let temperatureEast = this.getSquare(i + 1, j).temperature - temp;
         
         // Diffusion
         let alpha = (currentSquare.conductivity * dt) / (2 * dx * dx);
@@ -99,10 +102,10 @@ function ScalarField(n, m, squareWidth, squareHeight) {
   }
 }
 
+const squareSize = 20;
 var scalarField = null;
 
 function initDiffusion() {
-  const squareSize = 20;
   scalarField = new ScalarField(width / squareSize, height / squareSize, squareSize, squareSize);
   
   // Create obstacles
@@ -119,6 +122,26 @@ function initDiffusion() {
   }
 }
 
+function drawPointer() {
+  if(scalarField != null) {
+    let x = floor(mouseX / squareSize);
+    let y = floor(mouseY / squareSize);
+    if(x >= 0 && x < scalarField.n && y >= 0 && y < scalarField.m) {
+      let square = scalarField.getSquare(x, y);
+      stroke(0, 255, 0);
+      //point(square.x + squareSize / 2, square.y + squareSize / 2);
+      const r = 5;
+      circle(square.x + squareSize / 2, square.y + squareSize / 2, r);
+    }
+    
+  }
+}
+
+// If cooling enabled, initial temperature is warmer (obviously)
+let cooling = false;
+const DEFAULT_TEMPERATURE = 25;
+const COOLING_TEMPERATURE = 2500;
+
 function setup() {
   createCanvas(620, 620);
   initDiffusion();
@@ -129,18 +152,33 @@ function draw() {
   
   if(scalarField != null) {
     scalarField.draw();
-    scalarField.applyDiffusion();
+    scalarField.applyDiffusion(cooling);
   }
+  
+  drawPointer();
   
   fill(255);
   stroke(0);
-  text("Press A in order to init diffusion", 25, 25);
-  text("Press R in order to reset diffusion", 25, 45);
+  text("Press R in order to reset diffusion", 20, 30);
+  text("Press C in order to enable/disable cooling: " + cooling, 20, 50);
+  text("Click in order to apply temperature", 20, 70);
 }
 
 function keyPressed() {
-  if(key == "A" || key == "a") 
-    scalarField.getSquare(8, 15).temperature = 1;
-  else if(key == "R" || key == "r")  
+  if(key == "R" || key == "r")  
     initDiffusion();
+  else if(key == "C" || key == "c") {
+    cooling = !cooling;
+    initDiffusion();
+  }
+}
+
+function mousePressed() {
+  // Apply temperature
+  let x = floor(mouseX / squareSize);
+  let y = floor(mouseY / squareSize);
+  if(x >= 0 && x < scalarField.n && y >= 0 && y < scalarField.m) {
+    if(scalarField.getSquare(x, y).conductivity > 0)
+    scalarField.getSquare(x, y).temperature = (!cooling) ? DEFAULT_TEMPERATURE : COOLING_TEMPERATURE;
+  }
 }
