@@ -17,3 +17,7 @@ $\alpha$ is the diffusivity constant
 [Simulation](https://morcillosanz.github.io/HeatEquation-JS/)
 
 ![alt text](https://github.com/MorcilloSanz/HeatEquation-JS/blob/main/img/demo.png)
+
+## Dependencies
+
+`p5.js` for drawing
